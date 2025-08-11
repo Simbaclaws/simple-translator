@@ -87,30 +87,26 @@ Add one of these snippets to your HTML to allow users to change the language. Th
 
 
 ## 📚 API Reference
+
 ### new Translator(initialLang = 'en')
 Creates a new translator instance.
-
-### initialLang (string): The default language code to use. Defaults to 'en'.
+- initialLang (string): The default language code to use. Defaults to 'en'.
 
 ### .load(translationsData)
 Loads the translation object into the instance.
-
-### translationsData (object): The object containing all language translations.
+- translationsData (object): The object containing all language translations.
 
 ### .setLanguage(lang)
 Sets the current language and triggers a re-render of all translated elements on the page.
-
-### lang (string): The language code to switch to (e.g., 'es').
+- lang (string): The language code to switch to (e.g., 'es').
 
 ### .get(key, vars = {})
 Retrieves a specific translated string for the current language.
-
-### key (string): The dot-notation key for the translation.
-
-### vars (object, optional): An object of key-value pairs to replace placeholders in the string.
+- key (string): The dot-notation key for the translation.
+- vars (object, optional): An object of key-value pairs to replace placeholders in the string.
 
 ### .apply()
 Scans the entire document for data-translate attributes and updates the content of those elements with the correct translation.
 
-📄 License
+## 📄 License
 This project is open source and available under the MIT License.

@@ -39,7 +39,7 @@ translations.json:
 }
 ```
 
-```javasccript
+```javascript
 import Translator from './translator.js';
 
 // Import the JSON data directly using an import assertion

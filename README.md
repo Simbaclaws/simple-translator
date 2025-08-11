@@ -1,4 +1,4 @@
-# 🌐 Translator
+# 🌐 Simple Translator
 A minimal, dependency-free, vanilla JavaScript library for translating web page content. It's designed to be lightweight, easy to use, and flexible, allowing you to load translations from any source (JSON files, API endpoints, etc.).
 
 ## ✨ Features

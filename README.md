@@ -66,6 +66,7 @@ Mark up your HTML:
 ```html
 <!-- Pre-populate elements with default language content for SEO and non-JS users -->
 <h1 data-translate="page.header.title">Welcome!</h1>
+<p data-translate="page.header.subtitle">A simple translation library.</p>
 <p data-translate="content.greeting" data-translate-vars='{"user": "Alex"}'>Hello, {user}!</p>
 <button onclick="setLang('es')">Español</button>
 ```

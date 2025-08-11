@@ -173,4 +173,4 @@ Retrieves a specific translated string for the current language.
 Scans the entire document for data-translate attributes and updates the content of those elements with the correct translation.
 
 ## 📄 License
-This project is open source and available under the MIT License.
+This project is open source and available under the GPLv3 License.

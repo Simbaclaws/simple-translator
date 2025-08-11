@@ -1,4 +1,13 @@
 /**
+ * @file translator.js
+ * @description This library is a simple translator for multi-lingual content.
+ *
+ * @version 1.0.0
+ * @license GPLv3
+ * @author Hylke Hellinga
+ */
+
+/**
  * Translator: A minimal, dependency-free translation library.
  */
 class Translator {

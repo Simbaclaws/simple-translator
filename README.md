@@ -69,7 +69,7 @@ Mark up your HTML:
 <button onclick="setLang('es')">Español</button>
 ```
 
-## CSV Exampl
+## 📊 CSV Example
 You can also manage your translations in a spreadsheet and export it as a CSV file.
 
 ### Create your translations.csv file

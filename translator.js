@@ -61,7 +61,7 @@ class Translator {
         return text;
     }
 
-/**
+    /**
      * Scans the DOM, including Shadow DOMs, for elements with `data-translate` 
      * attributes and applies the corresponding translations.
      */

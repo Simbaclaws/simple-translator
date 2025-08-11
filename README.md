@@ -69,6 +69,68 @@ Mark up your HTML:
 <button onclick="setLang('es')">Español</button>
 ```
 
+## CSV Exampl
+You can also manage your translations in a spreadsheet and export it as a CSV file.
+
+### Create your translations.csv file
+The first column should be the key, and subsequent columns should be the language codes.
+
+translations.csv:
+```csv
+key,en,es
+page.header.title,"Welcome!","¡Bienvenido!"
+page.header.subtitle,"A simple translation library.","Una librería de traducción simple."
+content.greeting,"Hello, {user}!","¡Hola, {user}!"
+```
+### Fetch and Parse the CSV
+Since the library requires a nested JSON object, you'll need a helper function to convert the flat CSV data into the correct format.
+
+main.js:
+```javascript
+import Translator from './translator.js';
+
+// Helper function to parse CSV and convert to the required JSON structure
+async function loadTranslationsFromCSV(url) {
+    const response = await fetch(url);
+    const csvText = await response.text();
+    const lines = csvText.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim());
+    const languages = headers.slice(1);
+    const translations = {};
+
+    languages.forEach(lang => translations[lang] = {});
+
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        const key = values[0].trim();
+        
+        languages.forEach((lang, langIndex) => {
+            const text = values[langIndex + 1].trim().replace(/"/g, '');
+            const keys = key.split('.');
+            let current = translations[lang];
+            for (let j = 0; j < keys.length - 1; j++) {
+                current[keys[j]] = current[keys[j]] || {};
+                current = current[keys[j]];
+            }
+            current[keys[keys.length - 1]] = text;
+        });
+    }
+    return translations;
+}
+
+// Initialize and load data
+async function init() {
+    const translationsData = await loadTranslationsFromCSV('./translations.csv');
+    const translator = new Translator('en');
+    translator.load(translationsData);
+    translator.apply();
+
+    window.setLang = (lang) => translator.setLanguage(lang);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+```
+
 ## 🕹️ Language Switcher Examples
 Add one of these snippets to your HTML to allow users to change the language. The setLang() function you defined in your script will handle the logic.
 

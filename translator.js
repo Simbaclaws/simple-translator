@@ -61,33 +61,44 @@ class Translator {
         return text;
     }
 
-    /**
-     * Scans the DOM for elements with `data-translate` attributes and applies
-     * the corresponding translations.
+/**
+     * Scans the DOM, including Shadow DOMs, for elements with `data-translate` 
+     * attributes and applies the corresponding translations.
      */
     apply() {
-        const elements = document.querySelectorAll('[data-translate]');
-        elements.forEach(el => {
+        // Start the recursive search from the main document body
+        this.translateNode(document.body);
+    }
+
+    /**
+     * A recursive function that translates elements in a given node and
+     * dives into any shadow roots it finds.
+     * @param {Node} rootNode - The node to search within (e.g., document.body or a shadowRoot).
+     */
+    translateNode(rootNode) {
+        // 1. Find and translate all elements with the attribute in the current root
+        const elementsToTranslate = rootNode.querySelectorAll('[data-translate]');
+        elementsToTranslate.forEach(el => {
             const key = el.getAttribute('data-translate');
-            
-            // Check for variables in a separate data attribute
             let vars = {};
             const varsAttr = el.getAttribute('data-translate-vars');
             if (varsAttr) {
                 try {
-                    // Safely parse the JSON-like string
                     vars = JSON.parse(varsAttr);
                 } catch (e) {
                     console.error(`Error parsing data-translate-vars for key "${key}":`, e);
                 }
             }
-            
-            // To avoid a "flash" of untranslated content, we can fade it out and back in
-            el.style.opacity = '0';
-            setTimeout(() => {
-                el.innerHTML = this.get(key, vars);
-                el.style.opacity = '1';
-            }, 150);
+            el.innerHTML = this.get(key, vars);
+        });
+
+        // 2. Find all elements in the current root that might have a shadow root
+        const allElements = rootNode.querySelectorAll('*');
+        allElements.forEach(el => {
+            // 3. If an element has a shadowRoot, recurse into it
+            if (el.shadowRoot) {
+                this.translateNode(el.shadowRoot);
+            }
         });
     }
 }

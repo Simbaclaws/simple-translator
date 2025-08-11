@@ -1,5 +1,5 @@
 /**
- * SimpleTranslator: A minimal, dependency-free translation library.
+ * Translator: A minimal, dependency-free translation library.
  */
 class Translator {
     /**
@@ -17,7 +17,6 @@ class Translator {
      */
     load(translationsData) {
         this.translations = translationsData;
-        console.log('Translations loaded.');
     }
 
     /**

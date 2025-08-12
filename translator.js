@@ -10,7 +10,7 @@
 /**
  * Translator: A minimal, dependency-free translation library.
  */
-class Translator {
+export default class Translator {
     /**
      * @param {string} initialLang - The initial language code (e.g., 'en').
      */
